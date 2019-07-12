@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://v3.bootcss.com/examples/dashboard/ -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="user" content="">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+    <title>订单管理系统</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">编辑产品</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" action="/edit_product/" method="post">
+                    <input type="text" style="display: none" name="id" value="{{ product_obj.id }}">
+                        <div class="form-group">
+                            <label for="product_title" class="col-sm-2 control-label">产品名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="product_title" name="product_title"
+                                       placeholder="产品名" value="{{ product_obj.title }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">商家</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="merchant">
+                                    {% for merchant in merchant_list %}
+                                        {% if product_obj.merchant_id == merchant.id %}
+                                            {#  当前产品关联的商家才默认选中#}
+                                            <option selected value="{{ merchant.id }}">{{ merchant.name }}</option>
+                                        {% else %}
+                                            {# 其他的商家不选中 #}
+                                            <option value="{{ merchant.id }}">{{ merchant.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

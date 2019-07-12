@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://v3.bootcss.com/examples/dashboard/ -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="user" content="">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+
+    <title>订单管理系统</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">编辑用户</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" action="/edit_user/" method="post">
+                        <input type="text" style="display: none" name="user_id" value="{{ user.id }}">
+                        <div class="form-group">
+                            <label for="product_title" class="col-sm-2 control-label">产品名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="product_title" name="user_name"
+                                       placeholder="产品名" value="{{ user.name }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">商家</label>
+                            <div class="col-sm-10">
+                                <select multiple name="products">
+                                    {% for product in product_list %}
+                                        {#                如果当前产品在当前用户关联的所有产品 里面 #}
+                                        {% if product in user.product.all %}
+                                            <option selected value="{{ product.id }}">{{ product.title }}</option>
+                                        {% else %}
+                                            <option value="{{ product.id }}">{{ product.title }}</option>{% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">提交</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
